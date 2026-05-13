@@ -30,11 +30,22 @@
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
 
   <!-- ── ANALYTICS (pegar IDs cuando los tengan) ───────────────────────── -->
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-M455TPVD');</script>
+  <!-- End Google Tag Manager -->
+
   <!-- Google Analytics GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7PK8VQ92BD"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-7PK8VQ92BD');
   </script>
@@ -188,12 +199,10 @@
     }
 
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 200;
-      font-style: italic;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.2em;
       font-size: clamp(64px, 13vw, 180px);
       color: var(--cream);
-      letter-spacing: -0.01em;
       line-height: 0.9;
       opacity: 0;
       animation: fadeup 1.2s ease 1s forwards;
@@ -700,15 +709,164 @@
       color: var(--cream-25);
       letter-spacing: 0.06em;
     }
+
+    /* ── WAITLIST MULTI-STEP ── */
+    .wl-step {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .wl-step.active {
+      display: flex;
+    }
+
+    .wl-step2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: clamp(260px, 60vw, 600px);
+      margin-top: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .wl-step2-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .wl-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .wl-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .wl-field label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cream-25);
+    }
+
+    .wl-field input,
+    .wl-field select {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--cream-25);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(14px, 1.6vw, 18px);
+      letter-spacing: 0.05em;
+      padding: 10px 0;
+      outline: none;
+      width: 100%;
+      caret-color: var(--cream);
+      transition: border-color 0.4s ease;
+      -webkit-appearance: none;
+    }
+
+    .wl-field select option {
+      background: #0e0e0d;
+      color: var(--cream);
+    }
+
+    .wl-field input:focus,
+    .wl-field select:focus {
+      border-bottom-color: var(--cream-50);
+    }
+
+    .wl-field input::placeholder {
+      color: var(--cream-25);
+      font-style: italic;
+    }
+
+    .wl-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .wl-chip {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cream-25);
+      border: 1px solid rgba(240, 235, 225, 0.15);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .wl-chip.selected {
+      color: var(--cream);
+      border-color: var(--cream-50);
+      background: var(--cream-12);
+    }
+
+    .wl-step2-skip {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream-25);
+      cursor: pointer;
+      margin-top: 20px;
+      border: none;
+      background: transparent;
+      transition: color 0.3s ease;
+    }
+
+    .wl-step2-skip:hover {
+      color: var(--cream-50);
+    }
+
+    .wl-position {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 200;
+      font-style: italic;
+      font-size: clamp(48px, 8vw, 80px);
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin: 16px 0 8px;
+    }
+
+    .wl-position-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cream-25);
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M455TPVD" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <div class="grain"></div>
 
   <!-- ── HERO ── -->
-  <section id="hero">
+  <section id="hero" data-gtm="section-hero">
     <div class="hero-bg"></div>
     <div class="hero-fade"></div>
 
@@ -725,7 +883,7 @@
   </section>
 
   <!-- ── PHILOSOPHY ── -->
-  <section class="section-philosophy">
+  <section class="section-philosophy" data-gtm="section-how-it-works">
     <div class="phi-text" data-reveal>
       Menos tiempo buscando.<br>Más tiempo haciendo lo que te gusta.
     </div>
@@ -745,7 +903,7 @@
   </section>
 
   <!-- ── HOW IT WORKS ── -->
-  <section class="section-how">
+  <section class="section-how" data-gtm="section-activities">
     <div class="how-label" data-reveal>— Cómo funciona -</div>
     <div class="how-steps">
       <div class="how-step" data-reveal>
@@ -769,7 +927,7 @@
   </section>
 
   <!-- ── MEMBERSHIP ── -->
-  <section class="section-membership">
+  <section class="section-membership" data-gtm="section-how-it-works">
     <div class="mem-label" data-reveal>— El modelo -</div>
     <div class="mem-title" data-reveal>Una membresía.<br>Todos los espacios.</div>
     <div class="mem-body" data-reveal>Comprás un paquete de créditos y los usás para reservar lo que quieras: yoga un
@@ -778,30 +936,90 @@
   </section>
 
   <!-- ── WAITLIST ── -->
-  <section class="section-waitlist">
+  <section class="section-waitlist" data-gtm="section-waitlist-form">
     <div class="wl-title" data-reveal>No te quedes afuera.</div>
-    <div class="wl-incentive" data-reveal>Las primeras 200 personas que se registren recibiran créditos gratis de
-      bienvenida para su primer mes.</div>
-
-    <div class="wl-form" id="wlForm" data-reveal>
-      <div class="wl-input-wrap">
-        <input class="wl-input" type="email" id="wlEmail" placeholder="Correo electrónico" autocomplete="off">
+    <div class="wl-incentive" data-reveal>Las primeras 200 personas reciben créditos gratis de bienvenida.</div>
+    <!-- PASO 1: email -->
+    <div class="wl-step active" id="wlStep1">
+      <div class="wl-form" id="wlForm">
+        <div class="wl-input-wrap">
+          <input class="wl-input" type="email" id="wlEmail" placeholder="Correo electrónico" autocomplete="off">
+        </div>
+        <button class="wl-btn" id="wlBtn" data-gtm="cta-waitlist-hero">Quiero ser parte</button>
+        <div class="wl-error" id="wlError">Por favor ingresá un email válido.</div>
       </div>
-      <button class="wl-btn" id="wlBtn">Quiero ser parte</button>
-      <div class="wl-error" id="wlError">Por favor ingresá un email válido.</div>
+      <div class="wl-counter" id="wlCounter">
+        <span id="wlCount">·</span> personas ya en la lista
+      </div>
     </div>
-
-    <div class="wl-success" id="wlSuccess">
-      Te avisamos cuando estemos listos.
+    <!-- PASO 2: datos opcionales -->
+    <div class="wl-step" id="wlStep2">
+      <div class="wl-sub" style="margin-bottom:8px;">¡Ya estás dentro!</div>
+      <div class="wl-incentive">Completá tus datos y conseguí créditos adicionales al lanzar.</div>
+      <div class="wl-step2-grid">
+        <div class="wl-field">
+          <label>Nombre</label>
+          <input type="text" id="wlNombre" placeholder="Tu nombre">
+        </div>
+        <div class="wl-field">
+          <label>Barrio</label>
+          <input type="text" id="wlBarrio" placeholder="Ej: Pocitos">
+        </div>
+        <div class="wl-field full">
+          <label>¿Con qué frecuencia hacés actividades de bienestar?</label>
+          <select id="wlFrecuencia">
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option value="diario">Todos los días</option>
+            <option value="3-5 por semana">3 a 5 veces por semana</option>
+            <option value="1-2 por semana">1 a 2 veces por semana</option>
+            <option value="ocasionalmente">Ocasionalmente</option>
+            <option value="quiero empezar">Quiero empezar</option>
+          </select>
+        </div>
+        <div class="wl-field full">
+          <label>¿Qué te interesa? (elegí todos los que quieras)</label>
+          <div class="wl-chips" id="wlInteresesChips">
+            <span class="wl-chip" data-val="yoga">Yoga</span>
+            <span class="wl-chip" data-val="pilates">Pilates</span>
+            <span class="wl-chip" data-val="meditacion">Meditación</span>
+            <span class="wl-chip" data-val="masajes">Masajes</span>
+            <span class="wl-chip" data-val="ceramica">Cerámica</span>
+            <span class="wl-chip" data-val="cocina">Cocina</span>
+            <span class="wl-chip" data-val="danza">Danza</span>
+            <span class="wl-chip" data-val="surf">Surf</span>
+            <span class="wl-chip" data-val="arte">Arte</span>
+            <span class="wl-chip" data-val="lectura">Club de lectura</span>
+            <span class="wl-chip" data-val="running">Running</span>
+            <span class="wl-chip" data-val="natacion">Natación</span>
+          </div>
+        </div>
+        <div class="wl-field full">
+          <label>¿Cómo nos encontraste?</label>
+          <select id="wlComoNos">
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option value="instagram">Instagram</option>
+            <option value="amigo">Me lo recomendó alguien</option>
+            <option value="google">Google</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+      </div>
+      <button class="wl-btn" id="wlStep2Btn" style="margin-top:32px;" data-gtm="cta-waitlist-submit">Guardar y ver mi
+        lugar</button>
+      <button class="wl-step2-skip" id="wlStep2Skip">Saltar por ahora →</button>
     </div>
-
-    <div class="wl-counter" id="wlCounter" data-reveal>
-      <span id="wlCount">·</span> personas ya en la lista
+    <!-- PASO 3: confirmación -->
+    <div class="wl-step" id="wlStep3">
+      <div class="wl-sub">Sos la persona número</div>
+      <div class="wl-position" id="wlPositionNum">—</div>
+      <div class="wl-position-label">en la lista de RYTUAL Uruguay</div>
+      <div class="wl-success" style="display:block; margin-top:32px;">
+        Te avisamos cuando estemos listos.
+      </div>
     </div>
-
-    <div class="wl-location" data-reveal>
-      Uruguay · 2026
-    </div>
+    <div class="wl-location" data-reveal>Uruguay · 2026</div>
   </section>
 
   <!-- ── FOOTER ── -->
@@ -811,86 +1029,146 @@
   </footer>
 
   <script>
-    // ── GOOGLE SHEETS ENDPOINT ────────────────────────────────────────────────
-    // Pegá acá la URL de tu Apps Script Web App una vez que la configures:
-    const SHEETS_URL = '';
-    // ─────────────────────────────────────────────────────────────────────────
+    // ── SUPABASE ──────────────────────────────────────────────────────────────
+    const SUPABASE_URL = 'https://jnyjxmlkgfxzdncybhus.supabase.co/rest/v1/';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpueWp4bWxrZ2Z4emRuY3liaHVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MTM1NjMsImV4cCI6MjA5NDE4OTU2M30.ZZzC7F11xznWOgYSBuiDxLuLcf52y6SrrkJwfe1Swz8';
+    // ──────────────────────────────────────────────────────────────────────────
 
-    // Scroll reveal
-    const reveals = document.querySelectorAll('[data-reveal]');
-    reveals.forEach((el, i) => {
+    let registeredEmail = '';
+    let waitlistPosition = null;
+
+    document.querySelectorAll('[data-reveal]').forEach((el, i) => {
       setTimeout(() => el.classList.add('visible'), i * 120);
     });
 
-    // ── WAITLIST COUNTER ─────────────────────────────────────────────────
-    const SEED_COUNT = 47; // Actualizar este número cuando tengan datos reales
-    function getCount() {
-      return SEED_COUNT + parseInt(localStorage.getItem('ry_signups') || '0');
-    }
+    const SEED_COUNT = 47;
+    function getCount() { return SEED_COUNT + parseInt(localStorage.getItem('ry_signups') || '0'); }
     function incrementCount() {
-      const current = parseInt(localStorage.getItem('ry_signups') || '0');
-      localStorage.setItem('ry_signups', current + 1);
+      const c = parseInt(localStorage.getItem('ry_signups') || '0');
+      localStorage.setItem('ry_signups', c + 1);
     }
     function updateCounterDisplay() {
       const el = document.getElementById('wlCount');
       if (el) el.textContent = getCount();
     }
     updateCounterDisplay();
-    // ─────────────────────────────────────────────────────────────────────
 
-    // Email validation helper
+    document.querySelectorAll('.wl-chip').forEach(chip => {
+      chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    });
+    function getSelectedChips(containerId) {
+      return [...document.querySelectorAll('#' + containerId + ' .wl-chip.selected')].map(c => c.dataset.val);
+    }
+
+    function getUTMs() {
+      const p = new URLSearchParams(window.location.search);
+      return {
+        utm_source: p.get('utm_source') || null,
+        utm_medium: p.get('utm_medium') || null,
+        utm_campaign: p.get('utm_campaign') || null,
+        utm_content: p.get('utm_content') || null,
+      };
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.wl-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('wlStep' + n).classList.add('active');
+    }
+
     function isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
     }
 
-    // Waitlist submit
-    async function submit() {
+    async function submitStep1() {
       const emailEl = document.getElementById('wlEmail');
       const errorEl = document.getElementById('wlError');
-      const v = emailEl.value.trim();
-
-      // Validate
-      if (!isValidEmail(v)) {
+      const email = emailEl.value.trim();
+      if (!isValidEmail(email)) {
         errorEl.style.display = 'block';
         emailEl.style.borderBottomColor = 'rgba(240,200,180,0.5)';
         return;
       }
-
-      // Hide error if it was showing
       errorEl.style.display = 'none';
       emailEl.style.borderBottomColor = '';
-
-      // Send to Google Sheets (if URL is configured)
-      if (SHEETS_URL) {
-        try {
-          await fetch(SHEETS_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: v, fecha: new Date().toISOString() })
-          });
-        } catch (e) {
-          console.warn('No se pudo guardar en Sheets:', e);
+      const payload = Object.assign({ email, referrer_url: document.referrer || null }, getUTMs());
+      try {
+        const res = await fetch(SUPABASE_URL + 'waitlist_users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+            'Prefer': 'return=representation',
+          },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          registeredEmail = email;
+          waitlistPosition = data[0] && data[0].waitlist_position ? data[0].waitlist_position : null;
+          incrementCount();
+          updateCounterDisplay();
+          showStep(2);
+        } else if (res.status === 409) {
+          registeredEmail = email;
+          showStep(2);
+        } else {
+          errorEl.textContent = 'Algo salió mal. Intentá de nuevo.';
+          errorEl.style.display = 'block';
         }
+      } catch (e) {
+        console.error('Supabase error:', e);
+        errorEl.textContent = 'Sin conexión. Intentá de nuevo.';
+        errorEl.style.display = 'block';
       }
-
-      // Increment counter and show success
-      incrementCount();
-      updateCounterDisplay();
-      document.getElementById('wlForm').style.display = 'none';
-      document.getElementById('wlSuccess').style.display = 'block';
     }
 
-    document.getElementById('wlBtn').addEventListener('click', submit);
-    document.getElementById('wlEmail').addEventListener('keydown', e => {
-      if (e.key === 'Enter') submit();
+    document.getElementById('wlBtn').addEventListener('click', submitStep1);
+    document.getElementById('wlEmail').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') submitStep1();
     });
-
-    // Hide error on input change
-    document.getElementById('wlEmail').addEventListener('input', () => {
+    document.getElementById('wlEmail').addEventListener('input', function () {
       document.getElementById('wlError').style.display = 'none';
       document.getElementById('wlEmail').style.borderBottomColor = '';
     });
+
+    async function submitStep2() {
+      const nombre = document.getElementById('wlNombre').value.trim() || null;
+      const barrio = document.getElementById('wlBarrio').value.trim() || null;
+      const frecuencia = document.getElementById('wlFrecuencia').value || null;
+      const intereses = getSelectedChips('wlInteresesChips');
+      const como_nos = document.getElementById('wlComoNos').value || null;
+      if (registeredEmail) {
+        try {
+          await fetch(SUPABASE_URL + 'waitlist_users?email=eq.' + encodeURIComponent(registeredEmail), {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+            },
+            body: JSON.stringify({
+              nombre,
+              barrio,
+              frecuencia,
+              intereses: intereses.length ? intereses : null,
+              como_nos_encontro: como_nos,
+            }),
+          });
+        } catch (e) {
+          console.error('Patch error:', e);
+        }
+      }
+      goToStep3();
+    }
+
+    function goToStep3() {
+      document.getElementById('wlPositionNum').textContent = waitlistPosition ? '#' + waitlistPosition : '✓';
+      showStep(3);
+    }
+
+    document.getElementById('wlStep2Btn').addEventListener('click', submitStep2);
+    document.getElementById('wlStep2Skip').addEventListener('click', goToStep3);
   </script>
 </body>
 
