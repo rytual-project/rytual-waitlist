@@ -749,7 +749,7 @@
     .wl-field label {
       font-family: 'Inter', sans-serif;
       font-weight: 200;
-      font-size: 9px;
+      font-size: 12px;
       letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--cream-25);
@@ -774,8 +774,20 @@
       -webkit-appearance: none;
     }
 
+    .wl-field select {
+      color: var(--cream-25);
+    }
+
+    .wl-field select.has-value {
+      color: var(--cream);
+    }
+
     .wl-field select option {
       background: #0e0e0d;
+      color: var(--cream-25);
+    }
+
+    .wl-field select option:not([value=""]) {
       color: var(--cream);
     }
 
@@ -854,6 +866,7 @@
       color: var(--cream-25);
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -895,7 +908,7 @@
       Pilates · Yoga · Masajes · Meditación<br>
       Surf · Cerámica · Club de lectura · Cafes <br>
       Danza · Talleres de arte · Run club <br>
-      Y mucho más..
+      Y mucho más...
     </div>
     <div class="phi-content" data-reveal>
       Todo eso que te hace bien, en un solo lugar. Muy pronto en Uruguay.
@@ -938,7 +951,7 @@
   <!-- ── WAITLIST ── -->
   <section class="section-waitlist" data-gtm="section-waitlist-form">
     <div class="wl-title" data-reveal>No te quedes afuera.</div>
-    <div class="wl-incentive" data-reveal>Las primeras 200 personas reciben créditos gratis de bienvenida.</div>
+    <div class="wl-incentive" data-reveal>Las primeras 500 personas reciben créditos gratis de bienvenida.</div>
     <!-- PASO 1: email -->
     <div class="wl-step active" id="wlStep1">
       <div class="wl-form" id="wlForm">
@@ -948,34 +961,32 @@
         <button class="wl-btn" id="wlBtn" data-gtm="cta-waitlist-hero">Quiero ser parte</button>
         <div class="wl-error" id="wlError">Por favor ingresá un email válido.</div>
       </div>
-      <div class="wl-counter" id="wlCounter">
-        <span id="wlCount">·</span> personas ya en la lista
-      </div>
     </div>
     <!-- PASO 2: datos opcionales -->
     <div class="wl-step" id="wlStep2">
-      <div class="wl-sub" style="margin-bottom:8px;">¡Ya estás dentro!</div>
-      <div class="wl-incentive">Completá tus datos y conseguí créditos adicionales al lanzar.</div>
+      <div class="wl-sub" style="margin-bottom:36px;">¡Listo! Gracias por ser parte.</div>
+      <div class="wl-incentive">Completá tus datos y conseguí beneficios adicionales.</div>
       <div class="wl-step2-grid">
         <div class="wl-field">
           <label>Nombre</label>
           <input type="text" id="wlNombre" placeholder="Tu nombre">
         </div>
         <div class="wl-field">
+          <label>Edad</label>
+          <select id="wlEdad">
+            <option value="" disabled selected>Seleccioná un rango</option>
+            <option value="18-24">18 – 24</option>
+            <option value="25-34">25 – 34</option>
+            <option value="35-44">35 – 44</option>
+            <option value="45-54">45 – 54</option>
+            <option value="55+">55 o más</option>
+          </select>
+        </div>
+        <div class="wl-field full">
           <label>Barrio</label>
           <input type="text" id="wlBarrio" placeholder="Ej: Pocitos">
         </div>
-        <div class="wl-field full">
-          <label>¿Con qué frecuencia hacés actividades de bienestar?</label>
-          <select id="wlFrecuencia">
-            <option value="" disabled selected>Seleccioná una opción</option>
-            <option value="diario">Todos los días</option>
-            <option value="3-5 por semana">3 a 5 veces por semana</option>
-            <option value="1-2 por semana">1 a 2 veces por semana</option>
-            <option value="ocasionalmente">Ocasionalmente</option>
-            <option value="quiero empezar">Quiero empezar</option>
-          </select>
-        </div>
+
         <div class="wl-field full">
           <label>¿Qué te interesa? (elegí todos los que quieras)</label>
           <div class="wl-chips" id="wlInteresesChips">
@@ -990,34 +1001,17 @@
             <span class="wl-chip" data-val="arte">Arte</span>
             <span class="wl-chip" data-val="lectura">Club de lectura</span>
             <span class="wl-chip" data-val="running">Running</span>
-            <span class="wl-chip" data-val="natacion">Natación</span>
+            <span class="wl-chip" data-val="otros">Otros</span>
           </div>
         </div>
-        <div class="wl-field full">
-          <label>¿Cómo nos encontraste?</label>
-          <select id="wlComoNos">
-            <option value="" disabled selected>Seleccioná una opción</option>
-            <option value="instagram">Instagram</option>
-            <option value="amigo">Me lo recomendó alguien</option>
-            <option value="google">Google</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="otro">Otro</option>
-          </select>
-        </div>
+
       </div>
-      <button class="wl-btn" id="wlStep2Btn" style="margin-top:32px;" data-gtm="cta-waitlist-submit">Guardar y ver mi
-        lugar</button>
-      <button class="wl-step2-skip" id="wlStep2Skip">Saltar por ahora →</button>
+      <button class="wl-btn" id="wlStep2Btn" style="margin-top:32px;" data-gtm="cta-waitlist-submit">Guardar</button>
     </div>
     <!-- PASO 3: confirmación -->
     <div class="wl-step" id="wlStep3">
-      <div class="wl-sub">Sos la persona número</div>
-      <div class="wl-position" id="wlPositionNum">—</div>
-      <div class="wl-position-label">en la lista de RYTUAL Uruguay</div>
-      <div class="wl-success" style="display:block; margin-top:32px;">
-        Te avisamos cuando estemos listos.
-      </div>
+      <div class="wl-sub" style="margin-bottom:36px;">¡Gracias!</div>
+      <div class="wl-incentive">Te avisamos cuando estemos listos.</div>
     </div>
     <div class="wl-location" data-reveal>Uruguay · 2026</div>
   </section>
@@ -1029,10 +1023,11 @@
   </footer>
 
   <script>
-    // ── SUPABASE ──────────────────────────────────────────────────────────────
+    // ── SUPABASE CLIENT ───────────────────────────────────────────────────────
     const SUPABASE_URL = 'https://jnyjxmlkgfxzdncybhus.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpueWp4bWxrZ2Z4emRuY3liaHVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MTM1NjMsImV4cCI6MjA5NDE4OTU2M30.ZZzC7F11xznWOgYSBuiDxLuLcf52y6SrrkJwfe1Swz8';
-    // ──────────────────────────────────────────────────────────────────────────
+    const SUPABASE_ANON_KEY = 'sb_publishable_5E3PC5woavzkSSyzh-M7GA_GL-oj6sD';
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // ─────────────────────────────────────────────────────────────────────────
 
     let registeredEmail = '';
     let waitlistPosition = null;
@@ -1041,7 +1036,7 @@
       setTimeout(() => el.classList.add('visible'), i * 120);
     });
 
-    const SEED_COUNT = 47;
+    const SEED_COUNT = 10;
     function getCount() { return SEED_COUNT + parseInt(localStorage.getItem('ry_signups') || '0'); }
     function incrementCount() {
       const c = parseInt(localStorage.getItem('ry_signups') || '0');
@@ -1051,7 +1046,7 @@
       const el = document.getElementById('wlCount');
       if (el) el.textContent = getCount();
     }
-    updateCounterDisplay();
+    document.addEventListener('DOMContentLoaded', updateCounterDisplay);
 
     document.querySelectorAll('.wl-chip').forEach(chip => {
       chip.addEventListener('click', () => chip.classList.toggle('selected'));
@@ -1083,6 +1078,7 @@
       const emailEl = document.getElementById('wlEmail');
       const errorEl = document.getElementById('wlError');
       const email = emailEl.value.trim();
+
       if (!isValidEmail(email)) {
         errorEl.style.display = 'block';
         emailEl.style.borderBottomColor = 'rgba(240,200,180,0.5)';
@@ -1090,35 +1086,27 @@
       }
       errorEl.style.display = 'none';
       emailEl.style.borderBottomColor = '';
+
       const payload = Object.assign({ email, referrer_url: document.referrer || null }, getUTMs());
-      try {
-        const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist_users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-            'Prefer': 'return=representation',
-          },
-          body: JSON.stringify(payload),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          registeredEmail = email;
-          waitlistPosition = data[0] && data[0].waitlist_position ? data[0].waitlist_position : null;
-          incrementCount();
-          updateCounterDisplay();
-          showStep(2);
-        } else if (res.status === 409) {
-          registeredEmail = email;
-          showStep(2);
-        } else {
-          errorEl.textContent = 'Algo salió mal. Intentá de nuevo.';
-          errorEl.style.display = 'block';
-        }
-      } catch (e) {
-        console.error('Supabase error:', e);
-        errorEl.textContent = 'Sin conexión. Intentá de nuevo.';
+
+      const { data, error } = await db
+        .from('waitlist_users')
+        .insert([payload])
+        .select();
+
+      if (!error) {
+        registeredEmail = email;
+        waitlistPosition = data[0]?.waitlist_position ?? null;
+        incrementCount();
+        updateCounterDisplay();
+        showStep(2);
+      } else if (error.code === '23505') {
+        // email duplicado — igual avanzar
+        registeredEmail = email;
+        showStep(2);
+      } else {
+        console.error('Supabase error:', error);
+        errorEl.textContent = 'Algo salió mal. Intentá de nuevo.';
         errorEl.style.display = 'block';
       }
     }
@@ -1134,38 +1122,33 @@
 
     async function submitStep2() {
       const nombre = document.getElementById('wlNombre').value.trim() || null;
+      const edad = document.getElementById('wlEdad').value || null;
       const barrio = document.getElementById('wlBarrio').value.trim() || null;
-      const frecuencia = document.getElementById('wlFrecuencia').value || null;
       const intereses = getSelectedChips('wlInteresesChips');
-      const como_nos = document.getElementById('wlComoNos').value || null;
+
       if (registeredEmail) {
-        try {
-          await fetch(SUPABASE_URL + '/rest/v1/waitlist_users?email=eq.' + encodeURIComponent(registeredEmail), {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_ANON_KEY,
-              'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-            },
-            body: JSON.stringify({
-              nombre,
-              barrio,
-              frecuencia,
-              intereses: intereses.length ? intereses : null,
-              como_nos_encontro: como_nos,
-            }),
-          });
-        } catch (e) {
-          console.error('Patch error:', e);
-        }
+        const { error } = await db
+          .from('waitlist_users')
+          .update({
+            nombre,
+            barrio,
+            edad: edad ? parseInt(edad.split('-')[0]) : null,
+            intereses: intereses.length ? intereses : null,
+          })
+          .eq('email', registeredEmail);
+
+        if (error) console.error('Update error:', error);
       }
       goToStep3();
     }
 
     function goToStep3() {
-      document.getElementById('wlPositionNum').textContent = waitlistPosition ? '#' + waitlistPosition : '✓';
       showStep(3);
     }
+
+    document.getElementById('wlEdad').addEventListener('change', function () {
+      this.classList.toggle('has-value', this.value !== '');
+    });
 
     document.getElementById('wlStep2Btn').addEventListener('click', submitStep2);
     document.getElementById('wlStep2Skip').addEventListener('click', goToStep3);
