@@ -1092,7 +1092,7 @@
       emailEl.style.borderBottomColor = '';
       const payload = Object.assign({ email, referrer_url: document.referrer || null }, getUTMs());
       try {
-        const res = await fetch(SUPABASE_URL + 'waitlist_users', {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist_users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1140,7 +1140,7 @@
       const como_nos = document.getElementById('wlComoNos').value || null;
       if (registeredEmail) {
         try {
-          await fetch(SUPABASE_URL + 'waitlist_users?email=eq.' + encodeURIComponent(registeredEmail), {
+          await fetch(SUPABASE_URL + '/rest/v1/waitlist_users?email=eq.' + encodeURIComponent(registeredEmail), {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
